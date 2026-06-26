@@ -1,25 +1,47 @@
-# Definir o compilador
-CC = gcc
+# ============================================================
+# Makefile — UniConnect
+#
+# Estrutura de pastas esperada:
+#   include/    .h dos módulos (interesse.h, utilizador.h, ...)
+#   estrutura/  utils.h, utils.c, TADs.h, TADs.c
+#   src/        .c dos módulos (interesse.c, utilizador.c, ...)
+#
+# Uso:
+#   make / mingw32-make         -> compila tudo para exec/uniconnect
+#   make run      -> compila e executa
+#   make clean    -> apaga .o e o executável
+# ============================================================
 
-# Definir as flags de compilação
-CFLAGS = -Iinclude -Wall -std=c99
+CC      := gcc
+CFLAGS  := -Wall -Wextra -std=c11 -g
+INCLUDES := -Iinclude -Iestrutura
 
-# Lista de arquivos fonte
-# SRC = main.c
-SRC = $(wildcard *.c)
+SRC_DIR    := src
+STRUCT_DIR := estrutura
 
-# Nome do executável
-OUT = programa
+#MAIN FORA DAS PASTAS
+MAIN := main.c
 
-# Regra principal para compilar o projeto
-all:
-	$(CC) $(CFLAGS) $(SRC) -o $(OUT) 
-# Cria o executável a partir dos arquivos fonte
+SOURCES := $(MAIN) \
+           $(wildcard $(SRC_DIR)/*.c) \
+           $(wildcard $(STRUCT_DIR)/*.c)
 
-# Regra para executar o programa após compilação
+OBJECTS := $(SOURCES:.c=.o)
+
+TARGET := uniconnect.exe
+
+.PHONY: all run clean
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
 run: all
-	./$(OUT)
+	./$(TARGET)
 
-# Limpar os arquivos compilados (como o executável)
 clean:
-	rm -f $(OUT)
+	rm -f $(OBJECTS) $(TARGET)
