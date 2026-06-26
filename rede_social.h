@@ -1,14 +1,11 @@
-//
-// Created by Diangienda on 21/06/2026.
-//
-
-#ifndef UNTITLED1_REDE_SOCIAL_H
-#define UNTITLED1_REDE_SOCIAL_H
-
 typedef struct Pessoa Pessoa;
 typedef struct node node;
 typedef struct Grafo Grafo;
 
+typedef struct {
+    int  id;
+    char nome[50];
+} Sessao;
 int buscarIndicePorId(Grafo* grafo, int id);
 node* criarNo(int valor);
 Grafo* criarGrafo(int capacidadeInicial);
@@ -21,7 +18,8 @@ void addAmizadePorId(Grafo* grafo, int id1, int id2);
 void imprimirRede(Grafo* grafo);
 void liberarGrafo(Grafo* grafo);
 
+int fazerLogin(Grafo* grafo, const char* nome, const char* senha, Sessao* sessao);
+void enviarPedidoAmizade(Grafo* grafo, int idRemetente, int idDestinatario);
+void responderPedidoAmizade(Grafo* grafo, int idDestinatario, int idRemetente, int aceitar);
+void imprimirPedidosPendentes(Grafo* grafo, int id);
 
-
-
-#endif //UNTITLED1_REDE_SOCIAL_H
