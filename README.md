@@ -66,7 +66,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/erivaldocazinga22">
+      <a href="https://github.com/erivaldomalebo">
         <img src="https://github.com/erivaldomalebo.png" width="100px;" alt="Foto do Erivaldo no GitHub"/><br>
         <sub>
           <b>Erivaldo Caginga</b>
